@@ -1,3 +1,5 @@
+# sources: https://docs.github.com/en/actions/use-cases-and-examples/creating-an-example-workflow
+#          https://github.com/marketplace/actions/wait-sleep
 name: deploy-page
 run-name: ${{ github.actor }} is deploying page
 on: [push]
@@ -11,8 +13,17 @@ jobs:
           node-version: '20'
       - run: npm install 	
       - run: npm run build
-      - uses: GuillaumeFalourd/wait-sleep-action@v1
+      - name: upload
+        uses: actions/upload-pages-artifact@v3 
         with:
-          time: '300' 
-# sources: https://docs.github.com/en/actions/use-cases-and-examples/creating-an-example-workflow
-#          https://github.com/marketplace/actions/wait-sleep
+          path: ./dist
+  deploy:
+      runs-on: ubuntu-latest
+      environment:
+        name: github-pages
+        url: ${{ steps.deployment.outputs.page_url }}
+      steps:
+        - name: deploy to pages
+          id: deployment
+          uses: actions/deploy-pages@v4
+
