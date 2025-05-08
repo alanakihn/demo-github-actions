@@ -29,7 +29,6 @@ jobs:
           path: ./dist
           
       - name: deploy 
-        id: deployment
         uses: actions/deploy-pages@v4
         
       - name: url
