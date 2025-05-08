@@ -10,4 +10,7 @@ jobs:
         with:
           node-version: '20'
       - run: npm install 	
+      - uses: GuillaumeFalourd/wait-sleep-action@v1
+        with:
+          time: '60' # for 60 seconds
       - run: npm run build
