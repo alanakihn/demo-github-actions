@@ -23,14 +23,9 @@ jobs:
 
       - run: npm run build
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-      - name: Deploy to GitHub Pages
+      - name: deploy 
         id: deployment
         uses: actions/deploy-pages@v4
         
-      - name: Deployed at
+      - name: url
         run: echo "Pages URL - ${{ steps.deployment.outputs.page_url }}"
