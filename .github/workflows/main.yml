@@ -13,4 +13,4 @@ jobs:
       - run: npm run build
       - uses: GuillaumeFalourd/wait-sleep-action@v1
         with:
-          time: '60' 
+          time: '300' 
