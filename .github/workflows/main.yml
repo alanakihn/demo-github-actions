@@ -1,5 +1,10 @@
 # sources: https://docs.github.com/en/actions/use-cases-and-examples/creating-an-example-workflow
 #          https://github.com/marketplace/actions/wait-sleep
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+  
 name: deploy-page
 run-name: ${{ github.actor }} is deploying page
 on: [push]
