@@ -1,34 +1,33 @@
-# sources: https://docs.github.com/en/actions/use-cases-and-examples/creating-an-example-workflow
-#          https://github.com/marketplace/actions/wait-sleep
 permissions:
   contents: read
   pages: write
   id-token: write
-  
+
 name: deploy-page
 run-name: ${{ github.actor }} is deploying page
+
 on: [push]
+
 jobs:
   deploy-webpage:
     runs-on: ubuntu-latest
+    name: github-pages
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-node@v4
         with:
           node-version: '20'
-      - run: npm install 	
+
+      - run: npm install
+
       - run: npm run build
-      - name: upload
-        uses: actions/upload-pages-artifact@v3 
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
-  deploy:
-      runs-on: ubuntu-latest
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-      steps:
-        - name: deploy to pages
-          id: deployment
-          uses: actions/deploy-pages@v4
 
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
